@@ -1,0 +1,14 @@
+{
+    "name": "alanjhonnes/folder-gallery",
+    "description": "A simple multi-level automatic generated gallery based on folders.",
+    "authors": [
+        {
+            "name": "Alan Jhonnes",
+            "email": "aj@alanjhonnes.com"
+        }
+    ],
+    "require": {
+        "imagine/imagine": "~0.5.0"
+
+    }
+}
