@@ -1,0 +1,20 @@
+{% import "menu-renderer.twig" as menu %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Galeria SAO</title>
+    <script>
+        var json = {{ json|raw }}
+    </script>
+</head>
+<body>
+    <div>
+        <ul>
+            {% for item in navigation  %}
+                <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
