@@ -15,6 +15,7 @@ use Symfony\Component\Finder\SplFileInfo;
 class ImageFolder {
 
     protected $name;
+    protected $folderPath;
     /* @var $folders ImageFolder[] */
     protected $folders;
     /* @var $images GalleryImage[] */
@@ -31,29 +32,30 @@ class ImageFolder {
         $this->folders = array();
         $this->images = array();
         $folderFinder = new Finder();
-        $folderPath = '';
         if($path == ''){
-            $folderPath = $name;
+            $this->folderPath = $name;
         }
         else {
-            $folderPath = $path . '/' . $name;
+            $this->folderPath = $path . '/' . $name;
         }
         $folderFinder
             ->directories()
-            ->in($folderPath)
+            ->in($this->folderPath)
             ->depth(0)
             ->sortByName();
 
         $imageFinder = new Finder();
         $imageFinder
             ->files()
-            ->in($folderPath)
-            ->depth(0)
+            ->in($this->folderPath)
+            ->depth('<= 0')
             ->name('*.jpg')
             ->name('*.jpeg')
             ->name('*.png')
             ->name('*.gif')
             ->sortByName();
+
+        $this->verifyAndCreateFolders();
 
         foreach($folderFinder as $file){
             /* @var $file SplFileInfo */
@@ -62,7 +64,7 @@ class ImageFolder {
 
         foreach($imageFinder as $file){
             /* @var $file SplFileInfo */
-            $this->images[] = new GalleryImage($file->getFilename(), $file->getPath());
+            $this->images[] = new GalleryImage($file);
         }
     }
 
@@ -80,6 +82,21 @@ class ImageFolder {
             $tree[$folder->getName()] = $subTree;
         }
         return $tree;
+    }
+
+    public function verifyAndCreateFolders(){
+        if(!is_dir($this->folderPath)){
+            mkdir($this->folderPath, 0777, true);
+        }
+        if(!is_dir('thumbnails/' . $this->folderPath)){
+            mkdir('thumbnails/' . $this->folderPath, 0777, true);
+        }
+        if(!is_dir('image-icons/' . $this->folderPath)){
+            mkdir('image-icons/' . $this->folderPath, 0777, true);
+        }
+
+
+
     }
 
     /**

@@ -9,25 +9,36 @@
 namespace AlanJhonnes\FolderGallery;
 
 
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Symfony\Component\Finder\SplFileInfo;
+
 class GalleryImage {
 
+    protected $file;
     protected $name;
     protected $path;
     protected $thumbnail;
 
+
     /**
-     * @param $name string
-     * @param $path string
+     * @param SplFileInfo $file
      */
-    public function __construct($name, $path){
-        $this->name = $name;
-        $this->path = $path;
+    public function __construct(SplFileInfo $file){
+        $this->file = $file;
+        $this->name = $file->getBasename('.' . $file->getExtension());
+        $this->path = $file->getPath() . '/' . $file->getFilename();
         $this->generateThumbnail();
     }
 
     protected function generateThumbnail()
     {
+        $resizer = new ImageResizer(new Imagine(), new Box(300, 300) );
+        $resizer->resize($this->getPath(), $this->getThumbnailPath());
+    }
 
+    public function getName(){
+        return $this->name;
     }
 
 
@@ -35,15 +46,21 @@ class GalleryImage {
      * return string The path to the file;
      */
     public function getPath(){
-        return $this->path . $this->name;
+        return $this->path;
     }
 
     /**
      *
      */
     public  function getThumbnailPath(){
-        //TODO
-        return $this->getPath();
+        return 'thumbnails/' . $this->getPath();
+    }
+
+    /**
+     *
+     */
+    public  function getIconPath(){
+        return 'image-icons/' . $this->getPath();
     }
 
 

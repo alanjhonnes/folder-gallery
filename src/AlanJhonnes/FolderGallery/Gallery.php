@@ -18,9 +18,10 @@ class Gallery {
     /**
      * Constructor.
      * @param $rootFolderName string The folder name to search for images and subfolders.
+     * @param $path string The relative path to the folder name.
      */
-    public function __construct($rootFolderName){
-        $this->rootFolder = new ImageFolder('images', '');
+    public function __construct($rootFolderName = 'images', $path = ''){
+        $this->rootFolder = new ImageFolder($rootFolderName, $path);
     }
 
     /**

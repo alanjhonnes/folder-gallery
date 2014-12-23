@@ -14,9 +14,10 @@ $twig = new Twig_Environment($loader, array(
 $gallery = new Gallery('images');
 $tree = $gallery->getTree();
 
+var_dump($tree);
+
 $serializer = SerializerBuilder::create()->build();
 $jsonContent = $serializer->serialize($tree, 'json');
-var_dump($tree);
 
 $template = $twig->loadTemplate('index.html.twig');
 

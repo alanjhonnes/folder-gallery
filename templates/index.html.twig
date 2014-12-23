@@ -1,20 +1,28 @@
 {% import "menu-renderer.twig" as menu %}
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="pt">
     <meta charset="UTF-8">
     <title>Galeria SAO</title>
+    <link rel="stylesheet" href="theme/css/jstree/default/style.css"/>
+    <link rel="stylesheet" href="theme/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="theme/css/main.css"/>
     <script>
         var json = {{ json|raw }}
     </script>
+    <script src="theme/js/jquery-1.11.2.js"></script>
+    <script src="theme/js/jstree.js"></script>
+    <script src="theme/js/main.js"></script>
 </head>
 <body>
     <div>
-        <ul>
-            {% for item in navigation  %}
-                <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-            {% endfor %}
-        </ul>
+        <nav role="navigation" class="navigation">
+            <img src="theme/img/logo.png" alt=""/>
+            {{ menu.branch(tree) }}
+        </nav>
+        <section role="main" class="main-container">
+
+        </section>
     </div>
 </body>
 </html>

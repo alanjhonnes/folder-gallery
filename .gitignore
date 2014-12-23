@@ -1,3 +1,5 @@
 /vendor/
 /images/*
+/thumbnails/*
+/image-icons/*
 /twig-cache/*

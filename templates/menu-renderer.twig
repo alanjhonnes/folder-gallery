@@ -1,3 +1,16 @@
 {% macro branch(tree) %}
-    <li></li>
+    <ul>
+    {% for key, resource in tree %}
+        {% if(resource ) is iterable %}
+            <li>
+                {{ key }}
+                {{ _self.branch(resource) }}
+            </li>
+        {% else %}
+            <li data-jstree='{"icon":"fa fa-file-image-o"}' data-path="{{ resource.path }}" data-thumbnail="{{ resource.thumbnailPath }}">
+                {{ resource.name }}
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
 {% endmacro %}
