@@ -73,14 +73,15 @@ class ImageFolder {
      */
     public function getTree(){
         $tree = array();
-        foreach($this->images as $image){
-            $tree[] = $image;
-        }
         foreach($this->folders as $folder){
             $subTree = $folder->getTree();
             if(count($subTree) > 0)
-            $tree[$folder->getName()] = $subTree;
+                $tree[$folder->getName()] = $subTree;
         }
+        foreach($this->images as $image){
+            $tree[] = $image;
+        }
+
         return $tree;
     }
 
@@ -94,9 +95,6 @@ class ImageFolder {
         if(!is_dir('image-icons/' . $this->folderPath)){
             mkdir('image-icons/' . $this->folderPath, 0777, true);
         }
-
-
-
     }
 
     /**

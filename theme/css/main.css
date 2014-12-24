@@ -1,7 +1,16 @@
+.logo {
+    display: block;
+    margin: 0 auto;
+}
+
 .navigation {
 
 }
 
 .main-container {
 
+}
+
+.main-container img {
+    width: 100%;
 }

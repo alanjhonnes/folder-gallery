@@ -33,8 +33,15 @@ class GalleryImage {
 
     protected function generateThumbnail()
     {
-        $resizer = new ImageResizer(new Imagine(), new Box(300, 300) );
-        $resizer->resize($this->getPath(), $this->getThumbnailPath());
+        if(!is_file($this->getThumbnailPath())){
+            $resizer = new ImageResizer(new Imagine(), new Box(300, 300) );
+            $resizer->resize($this->getPath(), $this->getThumbnailPath());
+        }
+        if(!is_file($this->getIconPath())){
+            $resizer = new ImageResizer(new Imagine(), new Box(24, 24) );
+            $resizer->resize($this->getPath(), $this->getIconPath());
+        }
+
     }
 
     public function getName(){

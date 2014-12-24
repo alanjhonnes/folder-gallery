@@ -4,25 +4,40 @@
 <head lang="pt">
     <meta charset="UTF-8">
     <title>Galeria SAO</title>
+    <link rel="icon" href="theme/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="theme/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="theme/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="theme/css/jstree/default/style.css"/>
+
     <link rel="stylesheet" href="theme/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="theme/source/jquery.fancybox.css"/>
+    <link rel="stylesheet" href="theme/source/helpers/jquery.fancybox-buttons.css"/>
+    <link rel="stylesheet" href="theme/source/helpers/jquery.fancybox-thumbs.css"/>
     <link rel="stylesheet" href="theme/css/main.css"/>
-    <script>
-        var json = {{ json|raw }}
-    </script>
     <script src="theme/js/jquery-1.11.2.js"></script>
     <script src="theme/js/jstree.js"></script>
+    <script src="theme/js/lodash.compat.js"></script>
+    <script src="theme/source/jquery.fancybox.pack.js"></script>
+    <script src="theme/source/helpers/jquery.fancybox-buttons.js"></script>
+    <script src="theme/source/helpers/jquery.fancybox-thumbs.js"></script>
+
     <script src="theme/js/main.js"></script>
 </head>
 <body>
-    <div>
-        <nav role="navigation" class="navigation">
-            <img src="theme/img/logo.png" alt=""/>
-            {{ menu.branch(tree) }}
-        </nav>
-        <section role="main" class="main-container">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="logo" src="theme/img/logo.png" alt=""/>
+            <nav role="navigation" class="navigation">
+                {{ menu.branch(tree, '') }}
+            </nav>
+        </div>
+        <div class="col-md-9">
+            <section role="main" class="main-container">
 
-        </section>
+            </section>
+        </div>
     </div>
+</div>
 </body>
 </html>
